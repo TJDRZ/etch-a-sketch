@@ -1,6 +1,16 @@
 const newGrid = document.querySelector('#new-grid');
+const rainbow = document.querySelector('#rainbow');
 const container = document.querySelector("#container");
 let gridCapacity = 256;
+let rgb = randomColor();
+let color = false;
+
+function randomColor() {
+   let r = Math.round(Math.random() * 255);
+   let g = Math.round(Math.random() * 255);
+   let b = Math.round(Math.random() * 255);
+   return "rgb(" + r + "," + g + "," + b + ")";
+}
 
 function createGrid(gridCapacity) {
     let blockSize = 500 / Math.sqrt(gridCapacity);
@@ -10,11 +20,19 @@ function createGrid(gridCapacity) {
         div.id = (i);
         div.style.height = blockSize + "px";
         div.style.width =  blockSize + "px";
-        container.appendChild(div);
         div.addEventListener('mouseenter', () => {
-            div.style.backgroundColor = "black";
+            if (color == false) {
+                div.style.backgroundColor = "black";
+            }
+            else {
+                randomColor();
+                rgb = randomColor();
+                div.style.backgroundColor = rgb;
+            }
         })
+        container.appendChild(div);
     }
+    console.log(blockSize);
 }
 createGrid(gridCapacity);
 
@@ -30,3 +48,11 @@ newGrid.addEventListener('click', () => {
     createGrid(gridCapacity);
 })
 
+rainbow.addEventListener('click', () => {
+    if (color == false) {
+        color = true;
+    }
+    else {
+        color = false;
+    }
+})
