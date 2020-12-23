@@ -32,7 +32,6 @@ function createGrid(gridCapacity) {
         })
         container.appendChild(div);
     }
-    console.log(blockSize);
 }
 createGrid(gridCapacity);
 
