@@ -1,24 +1,24 @@
 body {
-    background-color: red;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
+    background-color: red;
 }
 
 h1 {
-    color: gold;
     font-family:'Courier New', Courier, monospace;
     font-style: italic;
+    color: gold;
 }
 
 #container {
-    height: 500px;
-    width: 500px;
-    background-color:#bbb;
     display: flex;
     flex-wrap: wrap;
+    height: 500px;
+    width: 500px;
     overflow: hidden;
+    background-color:#bbb;
 }
 
 .block {
@@ -32,18 +32,18 @@ h1 {
 
 #new-grid {
     float: left;
-    border-radius: 50%;
     height: 100px;
     width: 100px;
-    background-color: #fff;
     font-weight: bold;
+    background-color: #fff;
+    border-radius: 50%;
 }
 
 #rainbow {
     float: right;
-    border-radius: 50%;
     height: 100px;
     width: 100px;
-    background-color: #fff;
     font-weight: bold;
+    background-color: #fff;
+    border-radius: 50%;
 }
