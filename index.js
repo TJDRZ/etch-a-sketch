@@ -1,57 +1,44 @@
-const newGrid = document.querySelector('#new-grid');
-const rainbow = document.querySelector('#rainbow');
+"use strict";
 const container = document.querySelector("#container");
-let gridCapacity = 256;
-let rgb = randomColor();
+const newGrid = document.querySelector("#new-grid");
+const rainbow = document.querySelector("#rainbow");
+// Color
 let color = false;
-
 function randomColor() {
-   let r = Math.round(Math.random() * 255);
-   let g = Math.round(Math.random() * 255);
-   let b = Math.round(Math.random() * 255);
-   return "rgb(" + r + "," + g + "," + b + ")";
+    let r = Math.round(Math.random() * 255);
+    let g = Math.round(Math.random() * 255);
+    let b = Math.round(Math.random() * 255);
+    return "rgb(" + r + "," + g + "," + b + ")";
 }
-
+rainbow.addEventListener("click", () => {
+    color = !color;
+});
+// Grid
+let gridCapacity = 256;
 function createGrid(gridCapacity) {
-    let blockSize = 500 / Math.sqrt(gridCapacity);
+    const blockSize = 500 / Math.sqrt(gridCapacity);
     for (let i = 0; i < gridCapacity; i++) {
-        const div = document.createElement('div');
-        div.classList = ("block");
-        div.id = (i);
+        const div = document.createElement("div");
+        div.classList.add("block");
         div.style.height = blockSize + "px";
-        div.style.width =  blockSize + "px";
-        div.addEventListener('mouseenter', () => {
-            if (color == false) {
-                div.style.backgroundColor = "black";
-            }
-            else {
-                randomColor();
-                rgb = randomColor();
-                div.style.backgroundColor = rgb;
-            }
-        })
+        div.style.width = blockSize + "px";
+        div.addEventListener("mouseenter", () => {
+            !color
+                ? (div.style.backgroundColor = "black")
+                : (div.style.backgroundColor = randomColor());
+        });
         container.appendChild(div);
     }
 }
-createGrid(gridCapacity);
-
-newGrid.addEventListener('click', () => {
-    while(container.firstElementChild) {
+newGrid.addEventListener("click", () => {
+    while (container.firstElementChild) {
         container.removeChild(container.firstElementChild);
     }
-    let sideBlocks = window.prompt("How many squares per side? (MAX: 100)");
-    if (sideBlocks > 100) {
-        sideBlocks = 100;
-    }
-    gridCapacity = sideBlocks * sideBlocks;
+    let sideBlocks = window.prompt("How many squares per side?");
+    if (!sideBlocks?.match(/^\d$/))
+        sideBlocks = "16";
+    gridCapacity = parseInt(sideBlocks) * parseInt(sideBlocks);
     createGrid(gridCapacity);
-})
-
-rainbow.addEventListener('click', () => {
-    if (color == false) {
-        color = true;
-    }
-    else {
-        color = false;
-    }
-})
+});
+// Start
+createGrid(gridCapacity);
